@@ -19,7 +19,6 @@ class QuranService extends GetxController {
 
   Future<List<QuranModel>> getQuran() async {
     var response = await http.get(Uri.parse("${StringManager.baseUrl}/surah"));
-
     if (response.statusCode == 200) {
       final jsonData = jsonDecode(response.body)["data"];
       List<QuranModel> quranList = [];
@@ -35,7 +34,6 @@ class QuranService extends GetxController {
   }
 
   Future<List<SurahDetailsModel>> getSurah({int? number = 2}) async {
-    print(number);
     var response = await http
         .get(Uri.parse("${StringManager.baseUrl}/surah/$number/ar.alafasy"));
     if (response.statusCode == 200) {

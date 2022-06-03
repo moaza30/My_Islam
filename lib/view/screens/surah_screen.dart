@@ -5,7 +5,6 @@ import 'package:get/get.dart';
 import 'package:my_islamy/consts/color_manager.dart';
 import 'package:my_islamy/view/widget/text_utils.dart';
 import '../../services/network/quran_service.dart';
-import '../widget/custom_card.dart';
 import 'package:quran/quran.dart' as quran;
 
 class SurahScreen extends StatefulWidget {
@@ -36,17 +35,23 @@ class _SurahScreenState extends State<SurahScreen> {
             SizedBox(
               width: 200,
               child: TextUtlis(
-                  title: quran.basmala,
-                  fontSize: 20,
-                  textColor: ColorsManager.blackColor,
-                  fontWeight: FontWeight.bold,
-                  letterSpacing: 0.0),
+                title: quran.basmala,
+                fontSize: 20,
+                textColor: ColorsManager.blackColor,
+                fontWeight: FontWeight.bold,
+                letterSpacing: 0.0,
+              ),
             ),
             Expanded(
               child: ListView.builder(
-                itemCount: quran.getVerseCount(surahNumber),
+                itemCount: controller.surah.length,
                 itemBuilder: (context, index) {
-                  return customCard(index: index + 1, surahNumber: surahNumber);
+                  return customCard(
+                    index: index + 1,
+                    surahNumber: surahNumber,
+                    quranText: controller.surah[index].text!,
+                    quranAudio: controller.surah[index].audioUrl!,
+                  );
                 },
               ),
             ),
@@ -58,6 +63,8 @@ class _SurahScreenState extends State<SurahScreen> {
 }
 
 Widget customCard({
+  required String quranText,
+  required String quranAudio,
   required int index,
   required int surahNumber,
 }) {
@@ -80,8 +87,7 @@ Widget customCard({
                   child: Directionality(
                     textDirection: TextDirection.rtl,
                     child: TextUtlis(
-                      title:
-                          "${ArabicNumbers().convert(index)}- ${quran.getVerse(surahNumber, index)}",
+                      title: "(${ArabicNumbers().convert(index)}) $quranText",
                       fontSize: 18,
                       textColor: ColorsManager.blackColor,
                       fontWeight: FontWeight.w200,
@@ -92,7 +98,7 @@ Widget customCard({
                 IconButton(
                   onPressed: () {
                     AudioPlayer player = AudioPlayer();
-                    player.play("audioUrl");
+                    player.play(quranAudio);
                   },
                   icon: const Icon(
                     Icons.play_arrow,
