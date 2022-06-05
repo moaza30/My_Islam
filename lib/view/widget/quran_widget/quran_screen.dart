@@ -2,10 +2,11 @@ import 'package:arabic_numbers/arabic_numbers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_islamy/consts/color_manager.dart';
-import 'package:my_islamy/model/surah_details_model.dart';
+import 'package:my_islamy/logic/controller/quran_controller.dart';
 import 'package:my_islamy/services/network/quran_service.dart';
+import 'package:my_islamy/view/screens/surah_screen.dart';
 import 'package:my_islamy/view/widget/text_utils.dart';
-import '../../routes/routes.dart';
+import '../../../routes/routes.dart';
 
 class QuranScreen extends StatefulWidget {
   @override
@@ -16,7 +17,7 @@ class _QuranScreenState extends State<QuranScreen>
     with TickerProviderStateMixin {
   late TabController tabController;
   final controller = Get.put(QuranService());
-
+  final surahController = Get.put(SurahController());
   @override
   void initState() {
     super.initState();
@@ -52,13 +53,70 @@ class _QuranScreenState extends State<QuranScreen>
               children: [
                 ListView.separated(
                   itemBuilder: (context, index) {
-                    return customContainer(
-                      arText: controller.list[index].name!,
-                      enText: controller.list[index].englishName!,
-                      text: "عدد الأيات",
-                      width: 90,
-                      index: index + 1,
-                      surahNumber: controller.list[index].numberOfAyahs!,
+                    return InkWell(
+                      onTap: () {
+                        surahController.getSurah(index + 1);
+                        Get.to(() => SurahScreen());
+                      },
+                      child: Container(
+                        height: 100, //MediaQuery.of(context).size.height * 0.1,
+                        margin: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: ColorsManager.greyColor,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: TextUtlis(
+                                  title: controller.list[index].englishName!,
+                                  fontSize: 18,
+                                  textColor: ColorsManager.blackColor,
+                                  fontWeight: FontWeight.normal,
+                                  letterSpacing: 0.0,
+                                ),
+                              ),
+                              Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  TextUtlis(
+                                    title: "عدد الايات",
+                                    fontSize: 18,
+                                    textColor: ColorsManager.blackColor,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: 0.0,
+                                  ),
+                                  TextUtlis(
+                                    title: ArabicNumbers().convert(
+                                        controller.list[index].numberOfAyahs!),
+                                    fontSize: 18,
+                                    textColor: ColorsManager.blackColor,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: 0.0,
+                                  ),
+                                ],
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Directionality(
+                                  textDirection: TextDirection.rtl,
+                                  child: TextUtlis(
+                                    title: controller.list[index].name!,
+                                    fontSize: 17,
+                                    textColor: ColorsManager.blackColor,
+                                    fontWeight: FontWeight.normal,
+                                    letterSpacing: 0.0,
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ),
                     );
                   },
                   separatorBuilder: (context, index) {
@@ -113,8 +171,7 @@ Widget customContainer({
 }) {
   return InkWell(
     onTap: () {
-      QuranService().getSurah(number: index);
-      Get.toNamed(Routes.surahScreen, arguments: index);
+      Get.to(() => SurahScreen());
     },
     child: Container(
       height: 100, //MediaQuery.of(context).size.height * 0.1,

@@ -1,9 +1,9 @@
 import 'package:get/get.dart';
 import 'package:my_islamy/consts/string_manager.dart';
-import 'package:my_islamy/view/widget/qubla_screen.dart';
-import 'package:my_islamy/view/widget/quran_screen.dart';
-import 'package:my_islamy/view/widget/settings_screen.dart';
-import 'package:my_islamy/view/widget/time_screen.dart';
+import 'package:my_islamy/view/widget/prayer_time_screen.dart';
+import 'package:my_islamy/view/widget/qubla/qubla_screen.dart';
+import 'package:my_islamy/view/widget/quran_widget/quran_screen.dart';
+import 'package:my_islamy/view/widget/settings_widget/settings_screen.dart';
 
 class MainController extends GetxController {
   // use obs cuz currentIndex value will change constantly
