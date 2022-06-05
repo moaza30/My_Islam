@@ -57,13 +57,10 @@ class _SurahCardState extends State<SurahCard> {
                   Expanded(
                     child: Directionality(
                       textDirection: TextDirection.rtl,
-                      child: TextUtlis(
-                        title:
-                            "${ArabicNumbers().convert(surahController.surah[widget.index].number!)}- ${surahController.surah[widget.index].text!}",
-                        // title: "${surah.number} ${surah.text}",
-                        fontSize: 18,
-                        textColor: ColorsManager.blackColor,
-                        fontWeight: FontWeight.normal, letterSpacing: 0.0,
+                      child: Text(
+                        "(${ArabicNumbers().convert(surahController.surah[widget.index].number!)}) ${surahController.surah[widget.index].text!}",
+                        style:
+                            const TextStyle(fontSize: 18, fontFamily: "Quran"),
                       ),
                     ),
                   ),

@@ -6,4 +6,6 @@ class StringManager {
   static const prayerTime = "Prayer Time";
   static const settings = "Settings";
   static const baseUrl = "http://api.alquran.cloud/v1";
+  static const surahAudioUrl =
+      "https://cdn.islamic.network/quran/audio-surah/128/ar.alafasy/";
 }

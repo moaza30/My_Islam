@@ -12,7 +12,7 @@ class SurahScreen extends StatefulWidget {
 }
 
 class _SurahScreenState extends State<SurahScreen> {
-  final surahController = Get.put(SurahController());
+  final surahController = Get.find<SurahController>();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -57,6 +57,18 @@ class _SurahScreenState extends State<SurahScreen> {
                       },
                     ),
                   ),
+                  Container(
+                    width: MediaQuery.of(context).size.width,
+                    height: MediaQuery.of(context).size.height * 0.13,
+                    decoration: const BoxDecoration(
+                      color: ColorsManager.mainColor,
+                      borderRadius: BorderRadius.only(
+                        topLeft: Radius.circular(20),
+                        topRight: Radius.circular(20),
+                      ),
+                    ),
+                    child: Center(child: Text("ssss")),
+                  )
                 ],
               ),
             );
