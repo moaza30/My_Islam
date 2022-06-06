@@ -8,7 +8,6 @@ class SettingsController extends GetxController {
   var languageLocale = StringManager.enKey;
 
   // Change Application language
-
   @override
   void onInit() async {
     super.onInit();

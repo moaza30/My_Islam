@@ -15,11 +15,11 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await GetStorage.init();
-  runApp(const Islamy());
+  runApp(const MyIslam());
 }
 
-class Islamy extends StatelessWidget {
-  const Islamy({Key? key}) : super(key: key);
+class MyIslam extends StatelessWidget {
+  const MyIslam({Key? key}) : super(key: key);
 
   // This widget is the root of your application.
   @override
