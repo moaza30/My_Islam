@@ -56,7 +56,7 @@ class _QuranScreenState extends State<QuranScreen>
                     return InkWell(
                       onTap: () {
                         surahController.getSurah(index + 1);
-                        Get.to(() => SurahScreen());
+                        Get.toNamed(Routes.surahScreen, arguments: index + 1);
                       },
                       child: Container(
                         height: 100, //MediaQuery.of(context).size.height * 0.1,

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_islamy/consts/string_manager.dart';
 import 'package:my_islamy/logic/controller/main_controller.dart';
+import 'package:my_islamy/routes/routes.dart';
 import '../../consts/color_manager.dart';
 import 'package:get/get.dart';
 
@@ -17,7 +18,18 @@ class MainScreen extends StatelessWidget {
             elevation: 0,
             title: Text(controller.title[controller.currentIndex.value]),
             centerTitle: true,
+            actions: [
+              IconButton(
+                onPressed: () {
+                  Get.toNamed(Routes.settingScreen);
+                },
+                icon: const Icon(
+                  Icons.settings,
+                ),
+              ),
+            ],
           ),
+
           // Change Screens using GetX
           body: IndexedStack(
             index: controller.currentIndex.value,
@@ -55,10 +67,11 @@ class MainScreen extends StatelessWidget {
                 ),
               ),
               BottomNavigationBarItem(
-                  label: StringManager.settings,
-                  icon: Icon(
-                    Icons.settings,
-                  )),
+                label: StringManager.azkar,
+                icon: Icon(
+                  Icons.wb_sunny_outlined,
+                ),
+              ),
             ],
           ),
         );

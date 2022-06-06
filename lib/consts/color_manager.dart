@@ -5,4 +5,5 @@ class ColorsManager {
   static const whiteColor = Colors.white;
   static const blackColor = Colors.black;
   static const greyColor = Color.fromRGBO(211, 211, 211, 1);
+  static const Color darkSettings = Color(0xff6132e4);
 }
