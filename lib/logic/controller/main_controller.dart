@@ -8,7 +8,6 @@ import '../../view/widget/azkar_widget/azkar_screen.dart';
 class MainController extends GetxController {
   // use obs cuz currentIndex value will change constantly
   RxInt currentIndex = 0.obs;
-  var switchValue = false.obs;
   final screens = [
     QuranScreen(),
     TimeScreen(),

@@ -8,6 +8,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.0"
+  assets_audio_player:
+    dependency: "direct main"
+    description:
+      name: assets_audio_player
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.4+3"
+  assets_audio_player_web:
+    dependency: transitive
+    description:
+      name: assets_audio_player_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "3.0.4+3"
   async:
     dependency: transitive
     description:
@@ -15,13 +29,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.8.2"
-  audio_session:
-    dependency: transitive
-    description:
-      name: audio_session
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.1.7"
   audioplayers:
     dependency: "direct main"
     description:
@@ -240,27 +247,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.6.4"
-  just_audio:
-    dependency: "direct main"
-    description:
-      name: just_audio
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.24"
-  just_audio_platform_interface:
-    dependency: transitive
-    description:
-      name: just_audio_platform_interface
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "4.1.0"
-  just_audio_web:
-    dependency: transitive
-    description:
-      name: just_audio_web
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.4.7"
   lints:
     dependency: transitive
     description:
@@ -289,13 +275,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.7.0"
-  nested:
-    dependency: transitive
-    description:
-      name: nested
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "1.0.0"
   path:
     dependency: transitive
     description:
@@ -394,13 +373,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "4.2.4"
-  provider:
-    dependency: "direct main"
-    description:
-      name: provider
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "6.0.3"
   quran:
     dependency: "direct main"
     description:

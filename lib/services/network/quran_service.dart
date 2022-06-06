@@ -7,7 +7,6 @@ import 'package:my_islamy/model/surah_name_model.dart';
 
 class QuranService extends GetxController {
   var list = <QuranModel>[].obs;
-  var surahList = <SurahDetailsModel>[].obs;
   var isLoading = false.obs;
 
   @override

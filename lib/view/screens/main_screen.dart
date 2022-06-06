@@ -13,10 +13,13 @@ class MainScreen extends StatelessWidget {
     return Obx(
       () {
         return Scaffold(
+          backgroundColor: context.theme.backgroundColor,
           appBar: AppBar(
-            backgroundColor: ColorsManager.mainColor,
+            backgroundColor: Get.isDarkMode
+                ? ColorsManager.darkGreyClr
+                : ColorsManager.mainColor,
             elevation: 0,
-            title: Text(controller.title[controller.currentIndex.value]),
+            title: Text(controller.title[controller.currentIndex.value].tr),
             centerTitle: true,
             actions: [
               IconButton(
@@ -44,31 +47,35 @@ class MainScreen extends StatelessWidget {
               controller.currentIndex.value = index;
             },
             selectedItemColor: ColorsManager.mainColor,
-            unselectedItemColor: ColorsManager.blackColor,
+            unselectedItemColor: Get.isDarkMode
+                ? ColorsManager.whiteColor
+                : ColorsManager.blackColor,
             iconSize: 28,
             selectedFontSize: 13,
-            items: const [
+            items: [
               BottomNavigationBarItem(
-                label: StringManager.quran,
-                icon: ImageIcon(
+                label: StringManager.quran.tr,
+                icon: const ImageIcon(
                   AssetImage("assets/icons/reading.png"),
                 ),
               ),
               BottomNavigationBarItem(
-                label: StringManager.prayerTime,
-                icon: ImageIcon(
-                  AssetImage("assets/icons/time.png"),
+                label: StringManager.prayerTime.tr,
+                icon: const ImageIcon(
+                  AssetImage(
+                    "assets/icons/time.png",
+                  ),
                 ),
               ),
               BottomNavigationBarItem(
-                label: StringManager.qubla,
-                icon: ImageIcon(
+                label: StringManager.qubla.tr,
+                icon: const ImageIcon(
                   AssetImage("assets/icons/kaaba.png"),
                 ),
               ),
               BottomNavigationBarItem(
-                label: StringManager.azkar,
-                icon: Icon(
+                label: StringManager.azkar.tr,
+                icon: const Icon(
                   Icons.wb_sunny_outlined,
                 ),
               ),

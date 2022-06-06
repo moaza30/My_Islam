@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_islamy/consts/color_manager.dart';
-import 'package:my_islamy/consts/string_manager.dart';
 import 'package:my_islamy/logic/controller/quran_controller.dart';
-import 'package:my_islamy/view/widget/text_utils.dart';
-import 'package:quran/quran.dart' as quran;
 import '../widget/quran_widget/surah_card.dart';
 import 'package:audioplayers/audioplayers.dart';
 
@@ -15,24 +12,29 @@ class SurahScreen extends StatefulWidget {
 
 class _SurahScreenState extends State<SurahScreen> {
   final surahController = Get.find<SurahController>();
-  late int surahNumber;
-
+  late String surahName;
   final player = AudioPlayer();
-
-  void playAudio() async {
-    await player.play(
-        "https://cdn.islamic.network/quran/audio-surah/$surahNumber/ar.alafasy/");
-  }
 
   @override
   Widget build(BuildContext context) {
-    surahNumber = ModalRoute.of(context)!.settings.arguments as int;
+    surahName = ModalRoute.of(context)!.settings.arguments as String;
     return Scaffold(
-      backgroundColor: ColorsManager.whiteColor,
+      backgroundColor: context.theme.backgroundColor,
       appBar: AppBar(
-        backgroundColor: ColorsManager.whiteColor,
+        backgroundColor: context.theme.backgroundColor,
         centerTitle: true,
         elevation: 0,
+        title: Container(
+          width: double.infinity,
+          padding:
+              EdgeInsets.only(left: MediaQuery.of(context).size.width * 0.23),
+          child: Text(
+            surahName,
+            style: TextStyle(
+                color:
+                    Get.isDarkMode ? ColorsManager.whiteColor : Colors.black),
+          ),
+        ),
         iconTheme: const IconThemeData(
           color: ColorsManager.mainColor,
         ),
@@ -48,16 +50,6 @@ class _SurahScreenState extends State<SurahScreen> {
               textDirection: TextDirection.rtl,
               child: Column(
                 children: [
-                  /* SizedBox(
-                    width: 200,
-                    child: TextUtlis(
-                      title: quran.basmala,
-                      fontSize: 20,
-                      textColor: ColorsManager.blackColor,
-                      fontWeight: FontWeight.bold,
-                      letterSpacing: 0.0,
-                    ),
-                  ),*/
                   Expanded(
                     child: ListView.builder(
                       itemCount: surahController.surah.length,
@@ -69,33 +61,6 @@ class _SurahScreenState extends State<SurahScreen> {
                       },
                     ),
                   ),
-                  /* Container(
-                    width: MediaQuery.of(context).size.width,
-                    height: MediaQuery.of(context).size.height * 0.14,
-                    decoration: const BoxDecoration(
-                      color: ColorsManager.mainColor,
-                      borderRadius: BorderRadius.only(
-                        topLeft: Radius.circular(20),
-                        topRight: Radius.circular(20),
-                      ),
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          horizontal: 30, vertical: 10),
-                      child: Column(
-                        children: [
-                          IconButton(
-                            icon: const Icon(Icons.play_arrow),
-                            iconSize: 32.0,
-                            onPressed: () async {
-                              await player.play(
-                                  "https://cdn.islamic.network/quran/audio-surah/$surahNumber/ar.alafasy/");
-                            },
-                          ),
-                        ],
-                      ),
-                    ),
-                  )*/
                 ],
               ),
             );

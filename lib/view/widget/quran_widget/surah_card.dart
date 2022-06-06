@@ -15,7 +15,7 @@ class SurahCard extends StatefulWidget {
 }
 
 class _SurahCardState extends State<SurahCard> {
-  final surahController = Get.put(SurahController());
+  final surahController = Get.find<SurahController>();
 
   bool isVisible = false;
   bool isPlaying = false;
@@ -40,7 +40,7 @@ class _SurahCardState extends State<SurahCard> {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
       decoration: BoxDecoration(
-        color: ColorsManager.greyColor,
+        color: Get.isDarkMode ? ColorsManager.dark : ColorsManager.greyColor,
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
@@ -51,7 +51,7 @@ class _SurahCardState extends State<SurahCard> {
         child: Column(
           children: [
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -111,7 +111,6 @@ class _SurahCardState extends State<SurahCard> {
                   fontSize: 15,
                   textColor: ColorsManager.whiteColor,
                   fontWeight: FontWeight.w400,
-                  letterSpacing: 0.0,
                 ),
               ),
             ),
