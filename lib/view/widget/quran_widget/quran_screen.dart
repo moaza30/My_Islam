@@ -6,7 +6,6 @@ import 'package:my_islamy/consts/string_manager.dart';
 import 'package:my_islamy/logic/controller/quran_controller.dart';
 import 'package:my_islamy/logic/controller/settings_controller.dart';
 import 'package:my_islamy/services/network/quran_service.dart';
-import 'package:my_islamy/view/screens/surah_screen.dart';
 import 'package:my_islamy/view/widget/text_utils.dart';
 import '../../../routes/routes.dart';
 import 'cutom_container.dart';
@@ -96,16 +95,27 @@ class _QuranScreenState extends State<QuranScreen>
                                 children: [
                                   TextUtlis(
                                     title: StringManager.ayatNumber.tr,
-                                    fontSize: 18,
+                                    fontSize: 17,
                                     textColor: Get.isDarkMode
                                         ? ColorsManager.whiteColor
                                         : ColorsManager.blackColor,
                                     fontWeight: FontWeight.normal,
                                   ),
+                                  SizedBox(
+                                      height: langController.languageLocale ==
+                                              StringManager.arKey
+                                          ? 0
+                                          : 10),
                                   TextUtlis(
-                                    title: ArabicNumbers().convert(
-                                        controller.list[index].numberOfAyahs!),
-                                    fontSize: 18,
+                                    title: langController.languageLocale ==
+                                            StringManager.arKey
+                                        ? ArabicNumbers().convert(controller
+                                            .list[index].numberOfAyahs!)
+                                        : "${controller.list[index].numberOfAyahs!}",
+                                    fontSize: langController.languageLocale ==
+                                            StringManager.arKey
+                                        ? 18
+                                        : 15,
                                     textColor: Get.isDarkMode
                                         ? ColorsManager.whiteColor
                                         : ColorsManager.blackColor,
