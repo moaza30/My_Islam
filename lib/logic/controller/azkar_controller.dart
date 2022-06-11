@@ -16,12 +16,12 @@ class AzkarController extends GetxController {
     }
   }*/
 
-  void getAzkarDetails(int number) async {
+  /*void getAzkarDetails(int number) async {
     try {
       isLoading(true);
       azkar.value = await AzkarServices().getAzkarDetails(number);
     } finally {
       isLoading(false);
     }
-  }
+  }*/
 }

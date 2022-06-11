@@ -3,12 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-
 import 'loading_indicator.dart';
 import 'location_error_widget.dart';
 
 class QiblahMaps extends StatefulWidget {
-  static final meccaLatLong = const LatLng(21.422487, 39.826206);
+  static const meccaLatLong = LatLng(21.422487, 39.826206);
   final meccaMarker = Marker(
     markerId: const MarkerId("mecca"),
     position: meccaLatLong,
@@ -21,8 +20,8 @@ class QiblahMaps extends StatefulWidget {
 }
 
 class _QiblahMapsState extends State<QiblahMaps> {
-  Completer<GoogleMapController> _controller = Completer();
-  LatLng position = LatLng(36.800636, 10.180358);
+  final Completer<GoogleMapController> _controller = Completer();
+  LatLng position = const LatLng(36.800636, 10.180358);
 
   Future<Position?>? _future;
   final _positionStream = StreamController<LatLng>.broadcast();

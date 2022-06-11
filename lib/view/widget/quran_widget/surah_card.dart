@@ -1,37 +1,23 @@
 import 'package:arabic_numbers/arabic_numbers.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:my_islamy/view/widget/text_utils.dart';
 import '../../../consts/color_manager.dart';
-import '../../../logic/controller/quran_controller.dart';
+import 'package:quran/quran.dart' as quran;
 
 class SurahCard extends StatefulWidget {
-  final int index;
-  const SurahCard({Key? key, required this.index}) : super(key: key);
+  final int surahNumber, ayah;
+  const SurahCard({Key? key, required this.surahNumber, required this.ayah})
+      : super(key: key);
 
   @override
   State<SurahCard> createState() => _SurahCardState();
 }
 
 class _SurahCardState extends State<SurahCard> {
-  final surahController = Get.find<SurahController>();
+  Color color = Get.isDarkMode ? ColorsManager.dark : ColorsManager.greyColor;
 
-  bool isVisible = false;
-  bool isPlaying = false;
-  bool isDisabled = false;
-  AudioPlayer player = AudioPlayer();
-
-  void playSound() async {
-    isPlaying = true;
-    await player.play(surahController.surah[widget.index].audioUrl!);
-    isDisabled = true;
-    setState(() {});
-  }
-
-  void stopSound() async {
-    isPlaying = false;
-    await player.stop();
+  void changeColor() {
+    color = ColorsManager.mainColor;
     setState(() {});
   }
 
@@ -39,14 +25,15 @@ class _SurahCardState extends State<SurahCard> {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 5),
+      padding: const EdgeInsets.symmetric(vertical: 5),
       decoration: BoxDecoration(
-        color: Get.isDarkMode ? ColorsManager.dark : ColorsManager.greyColor,
+        color: color,
         borderRadius: BorderRadius.circular(10),
       ),
       child: InkWell(
-        onTap: () {
-          isVisible = !isVisible;
-          setState(() {});
+        onTap: () {},
+        onLongPress: () {
+          changeColor();
         },
         child: Column(
           children: [
@@ -60,58 +47,15 @@ class _SurahCardState extends State<SurahCard> {
                     child: Directionality(
                       textDirection: TextDirection.rtl,
                       child: Text(
-                        "${ArabicNumbers().convert(surahController.surah[widget.index].number!)} ${surahController.surah[widget.index].text!}",
+                        "${ArabicNumbers().convert(widget.ayah)} ${quran.getVerse(widget.surahNumber, widget.ayah)}",
                         style: const TextStyle(
-                            fontSize: 22,
-                            fontFamily: "Quran",
-                            fontWeight: FontWeight.w600),
+                          fontSize: 23,
+                          fontFamily: "Quran",
+                        ),
                       ),
                     ),
                   ),
-                  isPlaying
-                      ? IconButton(
-                          onPressed: () {
-                            stopSound();
-                          },
-                          icon: const Icon(
-                            Icons.pause,
-                            color: ColorsManager.mainColor,
-                            size: 30,
-                          ),
-                        )
-                      : IconButton(
-                          onPressed: isDisabled
-                              ? null
-                              : () {
-                                  playSound();
-                                },
-                          icon: const Icon(
-                            Icons.play_arrow,
-                            color: ColorsManager.mainColor,
-                            size: 30,
-                          ),
-                        ),
                 ],
-              ),
-            ),
-            Visibility(
-              visible: isVisible,
-              child: Container(
-                width: double.infinity,
-                padding:
-                    const EdgeInsets.symmetric(horizontal: 10, vertical: 15),
-                decoration: const BoxDecoration(
-                  color: ColorsManager.mainColor,
-                  borderRadius: BorderRadius.only(
-                      bottomRight: Radius.circular(5),
-                      bottomLeft: Radius.circular(5)),
-                ),
-                child: TextUtlis(
-                  title: "Sssss",
-                  fontSize: 15,
-                  textColor: ColorsManager.whiteColor,
-                  fontWeight: FontWeight.w400,
-                ),
               ),
             ),
           ],

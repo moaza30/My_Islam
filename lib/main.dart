@@ -6,7 +6,10 @@ import 'package:my_islamy/language/localization.dart';
 import 'package:my_islamy/logic/controller/theme_controller.dart';
 import 'package:my_islamy/routes/routes.dart';
 import 'package:get/get.dart';
+import 'package:my_islamy/services/network/azkar_services.dart';
+import 'package:provider/provider.dart';
 import 'consts/theme_manger.dart';
+import 'logic/controller/prayer_time_controller.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -15,7 +18,15 @@ void main() async {
     DeviceOrientation.portraitDown,
   ]);
   await GetStorage.init();
-  runApp(const MyIslam());
+  runApp(
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AzkarServices()),
+        ChangeNotifierProvider(create: (context) => PrayerController()),
+      ],
+      child: const MyIslam(),
+    ),
+  );
 }
 
 class MyIslam extends StatelessWidget {

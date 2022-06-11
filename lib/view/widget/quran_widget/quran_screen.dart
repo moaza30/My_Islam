@@ -5,10 +5,12 @@ import 'package:my_islamy/consts/color_manager.dart';
 import 'package:my_islamy/consts/string_manager.dart';
 import 'package:my_islamy/logic/controller/quran_controller.dart';
 import 'package:my_islamy/logic/controller/settings_controller.dart';
+import 'package:my_islamy/model/quran_data.dart';
 import 'package:my_islamy/services/network/quran_service.dart';
 import 'package:my_islamy/view/widget/text_utils.dart';
 import '../../../routes/routes.dart';
 import 'cutom_container.dart';
+import 'package:quran/quran.dart' as quran;
 
 class QuranScreen extends StatefulWidget {
   @override
@@ -18,8 +20,6 @@ class QuranScreen extends StatefulWidget {
 class _QuranScreenState extends State<QuranScreen>
     with TickerProviderStateMixin {
   late TabController tabController;
-  final controller = Get.put(QuranService());
-  final surahController = Get.find<SurahController>();
   final langController = Get.find<SettingsController>();
   @override
   void initState() {
@@ -29,176 +29,153 @@ class _QuranScreenState extends State<QuranScreen>
 
   @override
   Widget build(BuildContext context) {
-    return Obx(() {
-      return Column(
-        children: [
-          TabBar(
-            indicatorColor: ColorsManager.mainColor,
+    return Column(
+      children: [
+        TabBar(
+          indicatorColor: ColorsManager.mainColor,
+          controller: tabController,
+          tabs: [
+            Tab(
+              child: Text(
+                StringManager.surah.tr,
+                style: const TextStyle(color: ColorsManager.mainColor),
+              ),
+            ),
+            Tab(
+              child: Text(
+                StringManager.juz.tr,
+                style: const TextStyle(color: ColorsManager.mainColor),
+              ),
+            ),
+          ],
+        ),
+        Expanded(
+          child: TabBarView(
             controller: tabController,
-            tabs: [
-              Tab(
-                child: Text(
-                  StringManager.surah.tr,
-                  style: const TextStyle(color: ColorsManager.mainColor),
-                ),
-              ),
-              Tab(
-                child: Text(
-                  StringManager.juz.tr,
-                  style: const TextStyle(color: ColorsManager.mainColor),
-                ),
-              ),
-            ],
-          ),
-          Expanded(
-            child: TabBarView(
-              controller: tabController,
-              children: [
-                ListView.separated(
-                  itemBuilder: (context, index) {
-                    return InkWell(
-                      onTap: () {
-                        surahController.getSurah(index + 1);
-                        Get.toNamed(Routes.surahScreen,
-                            arguments: controller.list[index].name!);
-                      },
-                      child: Container(
-                        height: MediaQuery.of(context).size.height * 0.1,
-                        margin: const EdgeInsets.all(10),
-                        decoration: BoxDecoration(
-                          color: Get.isDarkMode
-                              ? ColorsManager.dark
-                              : ColorsManager.greyColor,
-                          borderRadius: BorderRadius.circular(15),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 15),
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Expanded(
-                                flex: 1,
+            children: [
+              ListView.separated(
+                itemBuilder: (context, index) {
+                  return InkWell(
+                    onTap: () {
+                      Get.toNamed(Routes.surahScreen, arguments: index);
+                    },
+                    child: Container(
+                      height: MediaQuery.of(context).size.height * 0.1,
+                      margin: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: Get.isDarkMode
+                            ? ColorsManager.dark
+                            : ColorsManager.greyColor,
+                        borderRadius: BorderRadius.circular(15),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 15),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Expanded(
+                              flex: 1,
+                              child: Directionality(
+                                textDirection: langController.languageLocale ==
+                                        StringManager.arKey
+                                    ? TextDirection.rtl
+                                    : TextDirection.ltr,
                                 child: TextUtlis(
                                   title: langController.languageLocale ==
                                           StringManager.arKey
-                                      ? controller.list[index].name!
-                                      : controller.list[index].englishName!,
-                                  fontSize: 18,
+                                      ? quran.getSurahNameArabic(index + 1)
+                                      : quran.getSurahName(index + 1),
+                                  fontSize: 20,
                                   textColor: Get.isDarkMode
                                       ? ColorsManager.whiteColor
                                       : ColorsManager.blackColor,
                                   fontWeight: FontWeight.normal,
                                 ),
                               ),
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  TextUtlis(
-                                    title: StringManager.ayatNumber.tr,
-                                    fontSize: 17,
-                                    textColor: Get.isDarkMode
-                                        ? ColorsManager.whiteColor
-                                        : ColorsManager.blackColor,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                  SizedBox(
-                                      height: langController.languageLocale ==
-                                              StringManager.arKey
-                                          ? 0
-                                          : 10),
-                                  TextUtlis(
-                                    title: langController.languageLocale ==
-                                            StringManager.arKey
-                                        ? ArabicNumbers().convert(controller
-                                            .list[index].numberOfAyahs!)
-                                        : "${controller.list[index].numberOfAyahs!}",
-                                    fontSize: langController.languageLocale ==
-                                            StringManager.arKey
-                                        ? 18
-                                        : 15,
-                                    textColor: Get.isDarkMode
-                                        ? ColorsManager.whiteColor
-                                        : ColorsManager.blackColor,
-                                    fontWeight: FontWeight.normal,
-                                  ),
-                                ],
-                              ),
-                              Expanded(
-                                flex: 1,
-                                child: Directionality(
-                                  textDirection:
-                                      langController.languageLocale ==
-                                              StringManager.arKey
-                                          ? TextDirection.ltr
-                                          : TextDirection.rtl,
-                                  child: TextUtlis(
-                                    title: langController.languageLocale ==
-                                            StringManager.arKey
-                                        ? controller.list[index].englishName!
-                                        : controller.list[index].name!,
-                                    fontSize: 20,
-                                    textColor: Get.isDarkMode
-                                        ? ColorsManager.whiteColor
-                                        : ColorsManager.blackColor,
-                                    fontWeight: FontWeight.normal,
-                                  ),
+                            ),
+                            const SizedBox(
+                              width: 7,
+                            ),
+                            Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                TextUtlis(
+                                  title: StringManager.ayatNumber.tr,
+                                  fontSize: 14,
+                                  textColor: Get.isDarkMode
+                                      ? ColorsManager.whiteColor
+                                      : ColorsManager.blackColor,
+                                  fontWeight: FontWeight.normal,
                                 ),
-                              ),
-                            ],
-                          ),
+                                TextUtlis(
+                                  title: langController.languageLocale ==
+                                          StringManager.arKey
+                                      ? ArabicNumbers()
+                                          .convert(QuranData.ayatNumbers[index])
+                                      : QuranData.ayatNumbers[index],
+                                  fontSize: langController.languageLocale ==
+                                          StringManager.arKey
+                                      ? 20
+                                      : 16,
+                                  textColor: Get.isDarkMode
+                                      ? ColorsManager.whiteColor
+                                      : ColorsManager.blackColor,
+                                  fontWeight: FontWeight.normal,
+                                ),
+                              ],
+                            ),
+                          ],
                         ),
                       ),
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Divider(
-                        color: ColorsManager.mainColor,
-                        thickness: 1,
-                      ),
-                    );
-                  },
-                  itemCount: controller.list.length,
-                ),
+                    ),
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Divider(
+                      color: ColorsManager.mainColor,
+                      thickness: 1,
+                    ),
+                  );
+                },
+                itemCount: QuranData.quranNames.length,
+              ),
 
-                // ListView for Juz details
-                ListView.separated(
-                  itemBuilder: (context, index) {
-                    return CustomContainer(
-                      index: index,
-                      arText:
-                          langController.languageLocale == StringManager.arKey
-                              ? "Juz"
-                              : "الجزء",
-                      enText:
-                          langController.languageLocale == StringManager.arKey
-                              ? "الجزء"
-                              : "Juz",
-                      width: 50,
-                      surahNumber: index + 1,
-                      textDirection:
-                          langController.languageLocale == StringManager.arKey
-                              ? TextDirection.ltr
-                              : TextDirection.rtl,
-                    );
-                  },
-                  separatorBuilder: (context, index) {
-                    return const Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 15),
-                      child: Divider(
-                        color: ColorsManager.mainColor,
-                        thickness: 1,
-                      ),
-                    );
-                  },
-                  itemCount: 30,
-                ),
-              ],
-            ),
+              // ListView for Juz details
+              ListView.separated(
+                itemBuilder: (context, index) {
+                  return CustomContainer(
+                    index: index,
+                    arText: langController.languageLocale == StringManager.arKey
+                        ? "Juz"
+                        : "الجزء",
+                    enText: langController.languageLocale == StringManager.arKey
+                        ? "الجزء"
+                        : "Juz",
+                    width: 50,
+                    surahNumber: index + 1,
+                    textDirection:
+                        langController.languageLocale == StringManager.arKey
+                            ? TextDirection.ltr
+                            : TextDirection.rtl,
+                  );
+                },
+                separatorBuilder: (context, index) {
+                  return const Padding(
+                    padding: EdgeInsets.symmetric(horizontal: 15),
+                    child: Divider(
+                      color: ColorsManager.mainColor,
+                      thickness: 1,
+                    ),
+                  );
+                },
+                itemCount: 30,
+              ),
+            ],
           ),
-        ],
-      );
-    });
+        ),
+      ],
+    );
   }
 }

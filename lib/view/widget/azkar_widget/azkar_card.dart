@@ -2,17 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_islamy/consts/color_manager.dart';
 import 'package:my_islamy/logic/controller/azkar_controller.dart';
+import 'package:my_islamy/model/azkar_list_model.dart';
+import 'package:my_islamy/services/network/azkar_services.dart';
 import '../text_utils.dart';
 
 class AzkarCard extends StatefulWidget {
-  final int index;
-  const AzkarCard({Key? key, required this.index}) : super(key: key);
+  final AzkarModel azkar;
+  const AzkarCard({Key? key, required this.azkar}) : super(key: key);
   @override
   State<AzkarCard> createState() => _AzkarCardState();
 }
 
 class _AzkarCardState extends State<AzkarCard> {
-  final controller = Get.find<AzkarController>();
+  // final controller = Get.find<AzkarController>();
   bool isVisible = false;
 
   @override
@@ -39,11 +41,11 @@ class _AzkarCardState extends State<AzkarCard> {
                     child: Directionality(
                       textDirection: TextDirection.rtl,
                       child: Text(
-                        controller.azkar[widget.index].arText!,
+                        widget.azkar.title!,
                         style: const TextStyle(
                             fontSize: 22,
-                            fontFamily: "Quran",
-                            fontWeight: FontWeight.w600),
+                            fontWeight: FontWeight.w600,
+                            color: Colors.black),
                       ),
                     ),
                   ),
@@ -63,7 +65,7 @@ class _AzkarCardState extends State<AzkarCard> {
                       bottomLeft: Radius.circular(5)),
                 ),
                 child: TextUtlis(
-                  title: controller.azkar[widget.index].enText!,
+                  title: "English title",
                   fontSize: 15,
                   textColor: ColorsManager.whiteColor,
                   fontWeight: FontWeight.w400,

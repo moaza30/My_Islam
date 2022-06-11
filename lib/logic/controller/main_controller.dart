@@ -1,6 +1,6 @@
 import 'package:get/get.dart';
 import 'package:my_islamy/consts/string_manager.dart';
-import 'package:my_islamy/view/widget/prayer_time_screen.dart';
+import 'package:my_islamy/view/widget/prayer_time/prayer_time_screen.dart';
 import 'package:my_islamy/view/widget/qubla/qubla_screen.dart';
 import 'package:my_islamy/view/widget/quran_widget/quran_screen.dart';
 import '../../view/widget/azkar_widget/azkar_screen.dart';

@@ -48,10 +48,6 @@ class AppRoutes {
     GetPage(
       name: Routes.azkarScreen,
       page: () => AzkarDetails(),
-      bindings: [
-        AzkarBinding(),
-        MainBinding(),
-      ],
     ),
   ];
 }

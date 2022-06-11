@@ -5,9 +5,12 @@ import 'package:my_islamy/consts/color_manager.dart';
 import 'package:my_islamy/consts/string_manager.dart';
 import 'package:my_islamy/logic/controller/azkar_controller.dart';
 import 'package:my_islamy/logic/controller/settings_controller.dart';
+import 'package:my_islamy/model/azkar_list_model.dart';
 import 'package:my_islamy/routes/routes.dart';
+import 'package:my_islamy/services/network/azkar_services.dart';
 import 'package:my_islamy/view/widget/text_utils.dart';
 import 'package:assets_audio_player/assets_audio_player.dart';
+import 'package:provider/provider.dart';
 
 class AzkarScreen extends StatefulWidget {
   @override
@@ -15,11 +18,10 @@ class AzkarScreen extends StatefulWidget {
 }
 
 class _AzkarScreenState extends State<AzkarScreen> {
-  final controller = Get.find<AzkarController>();
   // change app language
-  final langController = Get.find<SettingsController>();
-  bool isPlaying = false;
-  final assetsAudioPlayer = AssetsAudioPlayer();
+  // final langController = Get.find<SettingsController>();
+//  bool isPlaying = false;
+//  final assetsAudioPlayer = AssetsAudioPlayer();
   List<Map<String, dynamic>> azkarList = [
     {
       "ID": 129,
@@ -95,18 +97,18 @@ class _AzkarScreenState extends State<AzkarScreen> {
     },
   ];
 
-  void playSound(String path) async {
+  /*void playSound(String path) async {
     await assetsAudioPlayer.open(
       Audio("assets/sounds/$path"),
       showNotification: true,
     );
     setState(() {});
-  }
+  }*/
 
-  void stopSound() {
+  /*void stopSound() {
     assetsAudioPlayer.stop();
     setState(() {});
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
@@ -117,55 +119,57 @@ class _AzkarScreenState extends State<AzkarScreen> {
             itemBuilder: (context, index) {
               return InkWell(
                 onTap: () {
-                  controller.getAzkarDetails(azkarList[index]["ID"]);
                   Get.toNamed(Routes.azkarScreen,
                       arguments: azkarList[index]["TITLE"]);
                 },
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.08,
-                  margin: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    color: Get.isDarkMode
-                        ? ColorsManager.dark
-                        : ColorsManager.greyColor,
-                    borderRadius: BorderRadius.circular(15),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        IconButton(
-                          onPressed: () {
-                            playSound(azkarList[index]["audio"]);
-                          },
-                          icon: const Icon(
-                            Icons.play_arrow,
-                            color: ColorsManager.mainColor,
-                            size: 30,
+                child: FutureBuilder<List<AzkarModel>>(
+                    future: Provider.of<AzkarServices>(context, listen: false)
+                        .getAzkar(),
+                    builder: (context, snapshot) {
+                      return Container(
+                        height: MediaQuery.of(context).size.height * 0.08,
+                        margin: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: Get.isDarkMode
+                              ? ColorsManager.dark
+                              : ColorsManager.greyColor,
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            children: [
+                              IconButton(
+                                onPressed: () {
+                                  // playSound(azkarList[index]["audio"]);
+                                  print(snapshot.data![0]);
+                                },
+                                icon: const Icon(
+                                  Icons.play_arrow,
+                                  color: ColorsManager.mainColor,
+                                  size: 30,
+                                ),
+                              ),
+                              Expanded(
+                                flex: 1,
+                                child: Directionality(
+                                  textDirection: TextDirection.ltr,
+                                  child: TextUtlis(
+                                    title: "snapshot.data![index].toString()",
+                                    fontSize: 18,
+                                    textColor: Get.isDarkMode
+                                        ? ColorsManager.whiteColor
+                                        : ColorsManager.blackColor,
+                                    fontWeight: FontWeight.normal,
+                                  ),
+                                ),
+                              ),
+                            ],
                           ),
                         ),
-                        Expanded(
-                          flex: 1,
-                          child: Directionality(
-                            textDirection: TextDirection.ltr,
-                            child: TextUtlis(
-                              title: langController.languageLocale ==
-                                      StringManager.arKey
-                                  ? azkarList[index]["TITLE"]
-                                  : azkarList[index]["enTITLE"],
-                              fontSize: 18,
-                              textColor: Get.isDarkMode
-                                  ? ColorsManager.whiteColor
-                                  : ColorsManager.blackColor,
-                              fontWeight: FontWeight.normal,
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
+                      );
+                    }),
               );
             },
             separatorBuilder: (context, index) {
