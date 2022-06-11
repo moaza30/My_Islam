@@ -20,4 +20,7 @@ class StringManager {
   static const enKey = "en";
   static const arFlag = "العربية 🇸🇦";
   static const enFlag = "English 🇺🇸";
+  static const basmala = "بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيم ";
+  static const locationError = "locationError";
+  static const retry = "Retry";
 }

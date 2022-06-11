@@ -4,7 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_qiblah/flutter_qiblah.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geolocator/geolocator.dart';
+import 'package:get/get.dart';
 import 'package:my_islamy/view/widget/qubla/loading_indicator.dart';
+import '../../../consts/string_manager.dart';
 import 'location_error_widget.dart';
 
 class QiblahCompass extends StatefulWidget {
@@ -61,7 +63,7 @@ class _QiblahCompassState extends State<QiblahCompass> {
             }
           } else {
             return LocationErrorWidget(
-              error: "Please enable Location service",
+              error: StringManager.locationError.tr,
               callback: _checkLocationStatus,
             );
           }

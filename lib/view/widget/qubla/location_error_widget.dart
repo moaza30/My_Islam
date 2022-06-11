@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+import 'package:my_islamy/consts/color_manager.dart';
+import 'package:my_islamy/consts/string_manager.dart';
 
 class LocationErrorWidget extends StatelessWidget {
   final String? error;
@@ -29,7 +32,10 @@ class LocationErrorWidget extends StatelessWidget {
           ),
           box,
           ElevatedButton(
-            child: const Text("Retry"),
+            child: Text(StringManager.retry.tr),
+            style: ElevatedButton.styleFrom(
+              primary: ColorsManager.mainColor,
+            ),
             onPressed: () {
               if (callback != null) callback!();
             },

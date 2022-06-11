@@ -14,4 +14,6 @@ const Map<String, String> english = {
   StringManager.juz: "Juz",
   StringManager.surah: "Surah",
   StringManager.ayatNumber: "Ayat Number",
+  StringManager.locationError: "Please enable Location service",
+  StringManager.retry: "Retry",
 };

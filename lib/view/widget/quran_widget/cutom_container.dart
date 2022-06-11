@@ -11,7 +11,9 @@ class CustomContainer extends StatelessWidget {
   int surahNumber = 0;
   int index;
   double width;
+  Function() onTap;
   TextDirection textDirection;
+
   CustomContainer({
     required this.arText,
     required this.enText,
@@ -19,13 +21,12 @@ class CustomContainer extends StatelessWidget {
     required this.index,
     required this.width,
     required this.textDirection,
+    required this.onTap,
   });
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {
-        Get.to(() => SurahScreen());
-      },
+      onTap: onTap,
       child: Container(
         height: 100, //MediaQuery.of(context).size.height * 0.1,
         margin: const EdgeInsets.all(10),

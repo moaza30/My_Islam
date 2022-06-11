@@ -7,6 +7,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:my_islamy/view/screens/surah_screen.dart';
 import 'package:my_islamy/view/widget/azkar_widget/azkar_details.dart';
+import 'package:my_islamy/view/widget/quran_widget/juz_screen.dart';
 
 import '../view/screens/setting_screen.dart';
 
@@ -15,6 +16,7 @@ class Routes {
   static const surahScreen = "/surahScreen";
   static const settingScreen = "/settingScreen";
   static const azkarScreen = "/azkarScreen";
+  static const juzScreen = "/juzScreen";
 }
 
 class AppRoutes {
@@ -48,6 +50,10 @@ class AppRoutes {
     GetPage(
       name: Routes.azkarScreen,
       page: () => AzkarDetails(),
+    ),
+    GetPage(
+      name: Routes.juzScreen,
+      page: () => JuzScreen(),
     ),
   ];
 }

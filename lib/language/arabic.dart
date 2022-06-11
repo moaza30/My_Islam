@@ -12,5 +12,7 @@ const Map<String, String> arabic = {
   StringManager.language: "اللغة",
   StringManager.juz: "الجزء",
   StringManager.surah: "سورة",
-  StringManager.ayatNumber : "عدد الايات",
+  StringManager.ayatNumber: "عدد الايات",
+  StringManager.locationError: "الرجاء تشغيل خدمة الموقع",
+  StringManager.retry: "اعادة المحاولة",
 };
