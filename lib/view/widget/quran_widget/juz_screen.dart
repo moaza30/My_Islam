@@ -38,22 +38,10 @@ class _JuzScreenState extends State<JuzScreen> {
       ),
       body: Container(
         width: double.infinity,
-        padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 15),
+        padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 10),
         margin: const EdgeInsets.only(bottom: 10),
         child: Column(
           children: [
-            const Text(
-              StringManager.basmala,
-              style: TextStyle(
-                fontSize: 25,
-                fontWeight: FontWeight.bold,
-                fontFamily: "Quran",
-              ),
-            ),
-            const Divider(
-              thickness: 1,
-              color: ColorsManager.mainColor,
-            ),
             Expanded(
               child: SingleChildScrollView(
                 child: (sora == null)

@@ -61,8 +61,9 @@ class _QuranScreenState extends State<QuranScreen>
                       Get.toNamed(Routes.surahScreen, arguments: index);
                     },
                     child: Container(
-                      height: MediaQuery.of(context).size.height * 0.1,
-                      margin: const EdgeInsets.all(10),
+                      height: MediaQuery.of(context).size.height * 0.08,
+                      margin: const EdgeInsets.symmetric(
+                          horizontal: 10, vertical: 5),
                       decoration: BoxDecoration(
                         color: Get.isDarkMode
                             ? ColorsManager.dark
@@ -99,7 +100,7 @@ class _QuranScreenState extends State<QuranScreen>
                               children: [
                                 TextUtlis(
                                   title: StringManager.ayatNumber.tr,
-                                  fontSize: 14,
+                                  fontSize: 13,
                                   textColor: Get.isDarkMode
                                       ? ColorsManager.whiteColor
                                       : ColorsManager.blackColor,
@@ -111,10 +112,7 @@ class _QuranScreenState extends State<QuranScreen>
                                       ? ArabicNumbers()
                                           .convert(QuranData.ayatNumbers[index])
                                       : QuranData.ayatNumbers[index],
-                                  fontSize: langController.languageLocale ==
-                                          StringManager.arKey
-                                      ? 20
-                                      : 16,
+                                  fontSize: 16,
                                   textColor: Get.isDarkMode
                                       ? ColorsManager.whiteColor
                                       : ColorsManager.blackColor,

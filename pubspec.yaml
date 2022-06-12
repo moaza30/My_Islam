@@ -49,6 +49,7 @@ dependencies:
   geolocator: ^7.6.0
   location: ^4.4.0
   intl: ^0.17.0
+  pdfx: ^2.0.1+2
 
 dev_dependencies:
   flutter_test:

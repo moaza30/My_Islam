@@ -11,9 +11,9 @@ class QuranData {
             .split("\n");
     for (int i = 0; i < ayat.length; i++) {
       if (i == 0) {
-        sora = ayat[i].trim() + ' ${ArabicNumbers().convert(i + 1)} ';
+        sora = ayat[i].trim() + '\n';
       } else {
-        sora = sora + ayat[i].trim() + ' ${ArabicNumbers().convert(i + 1)} ';
+        sora = sora + ayat[i].trim() + '\n';
       }
     }
 

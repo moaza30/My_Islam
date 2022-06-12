@@ -28,14 +28,14 @@ class CustomContainer extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-        height: 100, //MediaQuery.of(context).size.height * 0.1,
-        margin: const EdgeInsets.all(10),
+        height: MediaQuery.of(context).size.height * 0.08,
+        margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
         decoration: BoxDecoration(
           color: Get.isDarkMode ? ColorsManager.dark : ColorsManager.greyColor,
           borderRadius: BorderRadius.circular(15),
         ),
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 15),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
@@ -43,7 +43,7 @@ class CustomContainer extends StatelessWidget {
                 flex: 1,
                 child: TextUtlis(
                   title: enText,
-                  fontSize: 22,
+                  fontSize: 20,
                   textColor: Get.isDarkMode
                       ? ColorsManager.whiteColor
                       : ColorsManager.blackColor,
