@@ -41,8 +41,17 @@ class PrayerController with ChangeNotifier {
     return prayerTimes;
   }
 
-  Future<DateTime> prayers() async {
+  Future<List<DateTime>> prayers() async {
     PrayerTimes prayers = await prayerTime();
-    return prayers.fajr;
+    List<DateTime> prayerList = [
+      prayers.fajr,
+      prayers.sunrise,
+      prayers.dhuhr,
+      prayers.asr,
+      prayers.maghrib,
+      prayers.isha,
+    ];
+
+    return prayerList;
   }
 }

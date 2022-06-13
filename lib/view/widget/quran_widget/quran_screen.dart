@@ -10,7 +10,6 @@ import 'package:my_islamy/view/widget/text_utils.dart';
 import '../../../routes/routes.dart';
 import 'cutom_container.dart';
 import 'package:quran/quran.dart' as quran;
-import 'juz_screen.dart';
 
 class QuranScreen extends StatefulWidget {
   @override
@@ -81,10 +80,11 @@ class _QuranScreenState extends State<QuranScreen>
                                   ? TextDirection.rtl
                                   : TextDirection.ltr,
                               child: TextUtlis(
-                                title: langController.languageLocale ==
+                                title: QuranData.quranNames[index],
+                                /* langController.languageLocale ==
                                         StringManager.arKey
                                     ? quran.getSurahNameArabic(index + 1)
-                                    : quran.getSurahName(index + 1),
+                                    : quran.getSurahName(index + 1),*/
                                 fontSize: 20,
                                 textColor: Get.isDarkMode
                                     ? ColorsManager.whiteColor
@@ -107,11 +107,12 @@ class _QuranScreenState extends State<QuranScreen>
                                   fontWeight: FontWeight.normal,
                                 ),
                                 TextUtlis(
-                                  title: langController.languageLocale ==
+                                  title: QuranData.ayatNumbers[index],
+                                  /* langController.languageLocale ==
                                           StringManager.arKey
                                       ? ArabicNumbers()
                                           .convert(QuranData.ayatNumbers[index])
-                                      : QuranData.ayatNumbers[index],
+                                      : QuranData.ayatNumbers[index],*/
                                   fontSize: 16,
                                   textColor: Get.isDarkMode
                                       ? ColorsManager.whiteColor

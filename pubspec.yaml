@@ -36,7 +36,6 @@ dependencies:
   http: ^0.13.4
   arabic_numbers: ^1.0.0
   flutter_qiblah: ^2.0.2
-  audioplayers: ^0.20.1
   quran: ^1.1.2
   flutter_compass: ^0.7.0
   flutter_svg: ^0.21.0-nullsafety.0
@@ -77,9 +76,10 @@ flutter:
   assets:
     - assets/images/
     - assets/icons/
+    - assets/quran_content/juz/
+    - assets/quran_content/surah/
     - assets/sounds/
-    - assets/quran_content/
-    - assets/azkar.json
+    - assets/azkar_content/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

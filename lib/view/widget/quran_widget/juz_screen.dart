@@ -12,17 +12,17 @@ class JuzScreen extends StatefulWidget {
 
 class _JuzScreenState extends State<JuzScreen> {
   late int index;
-  String? sora;
+  String? juz;
 
   void loadSora(int index) async {
-    sora = await QuranData.readSora(index);
+    juz = await QuranData.readJuz(index);
     setState(() {});
   }
 
   @override
   Widget build(BuildContext context) {
     index = ModalRoute.of(context)!.settings.arguments as int;
-    if (sora == null) {
+    if (juz == null) {
       loadSora(index);
     }
     return Scaffold(
@@ -44,12 +44,12 @@ class _JuzScreenState extends State<JuzScreen> {
           children: [
             Expanded(
               child: SingleChildScrollView(
-                child: (sora == null)
+                child: (juz == null)
                     ? const Center(
                         child: CircularProgressIndicator.adaptive(),
                       )
                     : Text(
-                        sora!,
+                        juz!,
                         textDirection: TextDirection.rtl,
                         style: TextStyle(
                           color: Get.isDarkMode

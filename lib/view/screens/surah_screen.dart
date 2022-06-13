@@ -2,11 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:my_islamy/consts/color_manager.dart';
 import 'package:my_islamy/consts/string_manager.dart';
-import 'package:my_islamy/logic/controller/quran_controller.dart';
 import 'package:my_islamy/logic/controller/settings_controller.dart';
-import 'package:my_islamy/model/quran_data.dart';
 import '../widget/quran_widget/surah_card.dart';
-import 'package:audioplayers/audioplayers.dart';
 import 'package:quran/quran.dart' as quran;
 
 class SurahScreen extends StatefulWidget {

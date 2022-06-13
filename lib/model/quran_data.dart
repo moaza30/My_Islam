@@ -3,12 +3,30 @@ import 'package:flutter/services.dart';
 
 class QuranData {
   static Future<String> readSora(int index) async {
+    //index+1 is sora number
+    String sora = '';
+    List<String> ayat = (await rootBundle
+            .loadString('assets/quran_content/surah/${index + 1}.txt'))
+        .trim()
+        .split('\n');
+    for (int i = 0; i < ayat.length; i++) {
+      if (i == 0) {
+        sora = ayat[i].trim() + ' {${ArabicNumbers().convert(i + 1)}} ';
+      } else {
+        sora = sora + ayat[i].trim() + ' {${ArabicNumbers().convert(i + 1)}} ';
+      }
+    }
+
+    return sora;
+  }
+
+  static Future<String> readJuz(int index) async {
     // index+1 is sora number
     String sora = '';
-    List<String> ayat =
-        (await rootBundle.loadString('assets/quran_content/${index + 1}.txt'))
-            .trim()
-            .split("\n");
+    List<String> ayat = (await rootBundle
+            .loadString('assets/quran_content/juz/${index + 1}.txt'))
+        .trim()
+        .split("\n");
     for (int i = 0; i < ayat.length; i++) {
       if (i == 0) {
         sora = ayat[i].trim() + '\n';
@@ -19,6 +37,123 @@ class QuranData {
 
     return sora;
   }
+
+  static const List quranNames = [
+    "الفاتحه",
+    "البقرة",
+    "آل عمران",
+    "النساء",
+    "المائدة",
+    "الأنعام",
+    "الأعراف",
+    "الأنفال",
+    "التوبة",
+    "يونس",
+    "هود",
+    "يوسف",
+    "الرعد",
+    "إبراهيم",
+    "الحجر",
+    "النحل",
+    "الإسراء",
+    "الكهف",
+    "مريم",
+    "طه",
+    "الأنبياء",
+    "الحج",
+    "المؤمنون",
+    "النّور",
+    "الفرقان",
+    "الشعراء",
+    "النّمل",
+    "القصص",
+    "العنكبوت",
+    "الرّوم",
+    "لقمان",
+    "السجدة",
+    "الأحزاب",
+    "سبأ",
+    "فاطر",
+    "يس",
+    "الصافات",
+    "ص",
+    "الزمر",
+    "غافر",
+    "فصّلت",
+    "الشورى",
+    "الزخرف",
+    "الدّخان",
+    "الجاثية",
+    "الأحقاف",
+    "محمد",
+    "الفتح",
+    "الحجرات",
+    "ق",
+    "الذاريات",
+    "الطور",
+    "النجم",
+    "القمر",
+    "الرحمن",
+    "الواقعة",
+    "الحديد",
+    "المجادلة",
+    "الحشر",
+    "الممتحنة",
+    "الصف",
+    "الجمعة",
+    "المنافقون",
+    "التغابن",
+    "الطلاق",
+    "التحريم",
+    "الملك",
+    "القلم",
+    "الحاقة",
+    "المعارج",
+    "نوح",
+    "الجن",
+    "المزّمّل",
+    "المدّثر",
+    "القيامة",
+    "الإنسان",
+    "المرسلات",
+    "النبأ",
+    "النازعات",
+    "عبس",
+    "التكوير",
+    "الإنفطار",
+    "المطفّفين",
+    "الإنشقاق",
+    "البروج",
+    "الطارق",
+    "الأعلى",
+    "الغاشية",
+    "الفجر",
+    "البلد",
+    "الشمس",
+    "الليل",
+    "الضحى",
+    "الشرح",
+    "التين",
+    "العلق",
+    "القدر",
+    "البينة",
+    "الزلزلة",
+    "العاديات",
+    "القارعة",
+    "التكاثر",
+    "العصر",
+    "الهمزة",
+    "الفيل",
+    "قريش",
+    "الماعون",
+    "الكوثر",
+    "الكافرون",
+    "النصر",
+    "المسد",
+    "الإخلاص",
+    "الفلق",
+    "الناس"
+  ];
 
   static const List ayatNumbers = [
     '7',
