@@ -19,19 +19,19 @@ class _AzkarScreenState extends State<AzkarScreen> {
   final langController = Get.find<SettingsController>();
 //  bool isPlaying = false;
   final assetsAudioPlayer = AssetsAudioPlayer();
-  List<Map<String, dynamic>> azkarList = [
+  List<Map<String, dynamic>> azkarList = [{
+    "ID": 27,
+    "TITLE": "أذكار الصباح والمساء",
+    "enTITLE": "Words of remembrance for morning and evening",
+    "audio": "morning.mp3"
+  },
     {
       "ID": 129,
       "TITLE": "الاستغفار و التوبة",
       "enTITLE": "Repentance and seeking forgiveness",
       "audio": "forgive.mp3"
     },
-    {
-      "ID": 27,
-      "TITLE": "أذكار الصباح والمساء",
-      "enTITLE": "Words of remembrance for morning and evening",
-      "audio": "morning.mp3"
-    },
+
     {
       "ID": 28,
       "TITLE": "أذكار النوم",
